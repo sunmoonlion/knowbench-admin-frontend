@@ -61,8 +61,7 @@
     "expandMenu": "展开导航",
     "closeTab": "关闭{name}",
     "governance": "管理能力迁移中枢",
-    "governanceDescription": "P0-007E 将在此基础上逐项迁入菜单、权限、CRUD、审计和通用工具能力。",
-    "workbenchMissingData": "缺数据的需求"
+    "governanceDescription": "P0-007E 将在此基础上逐项迁入菜单、权限、CRUD、审计和通用工具能力。"
   },
   "settings": {
     "title": "界面设置",
@@ -88,19 +87,5 @@
   "ResearchRuntime": {
     "title": "运行时治理",
     "description": "Research Admin Runtime/Agent 控制台（最小域壳）"
-  },
-  "demand": {
-    "title": "缺数据的需求",
-    "lead": "用户在对话里查不到数据的公司，按代码汇总：几次、几个人、最近一次、被查的数据集。只汇总，不说是谁查的。",
-    "howCollected": "只看。现在缺的数据由用户在委托里确认后、knowfeed 替用户采，平台不在这里发起采集。",
-    "loading": "加载中…",
-    "failed": "没有取到，请稍后再试。",
-    "none": "还没有人查不到数据。",
-    "code": "证券代码",
-    "times": "查过几次",
-    "users": "几个人",
-    "lastAt": "最近一次",
-    "datasets": "被查的数据集",
-    "noDataset": "（专家交回说没入库）"
   }
 }

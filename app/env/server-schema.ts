@@ -20,7 +20,6 @@ const serverEnvSchema = z.object({
   APP_ORIGIN: httpOrigin.optional(),
   BACKEND_INTERNAL_URL: httpOrigin.optional(),
   DEPLOYMENT_ID: z.string().trim().min(1).optional(),
-  // knowfeed 管理端的地址：「缺数据的需求」页从这里链去发起采集（账 56）。不配就只给代码、不给链接
 })
 
 export type ServerEnv = z.infer<typeof serverEnvSchema> & {
