@@ -42,20 +42,20 @@ beforeEach(() => {
 })
 afterEach(() => vi.unstubAllGlobals())
 
-function page(infoAdminUrl: string | null) {
+function page() {
   const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
   return render(
     <NextIntlClientProvider locale="zh-CN" messages={messages} timeZone="Asia/Shanghai">
       <QueryClientProvider client={client}>
-        <DemandPanel infoAdminUrl={infoAdminUrl} />
+        <DemandPanel />
       </QueryClientProvider>
     </NextIntlClientProvider>,
   )
 }
 
 describe('缺数据的需求', () => {
-  it('每家公司一行：几次、几个人、最近一次、被查的数据集；一键去 knowfeed 管理端发起', async () => {
-    page('https://knowfeed-admin.example.test')
+  it('每家公司一行：几次、几个人、最近一次、被查的数据集；只看，不给发起采集的链接', async () => {
+    page()
     const table = await screen.findByRole('table', { name: '缺数据的需求' })
     const rows = within(table).getAllByRole('row').slice(1)
     expect(rows).toHaveLength(2)
@@ -66,33 +66,27 @@ describe('缺数据的需求', () => {
     expect(moutai.getByText('2')).toBeInTheDocument()
     expect(moutai.getByText('2026年10月7日 12:20')).toBeInTheDocument()
     expect(moutai.getByText('sh600519-financials, sh600519-prices')).toBeInTheDocument()
-    const link = moutai.getByRole('link', { name: '去发起采集' })
-    expect(link).toHaveAttribute(
-      'href',
-      'https://knowfeed-admin.example.test/zh-CN/knowfeed/securities?code=600519',
-    )
-    expect(link).toHaveAttribute('target', '_blank')
+    expect(moutai.queryByRole('link')).toBeNull()
     // 专家交回说没入库的：没有数据集名，不留空
     expect(within(rows[0]).getByText('（专家交回说没入库）')).toBeInTheDocument()
   })
 
-  it('knowfeed 管理端的地址没配：说明原因，只列代码，不给点不了的链接', async () => {
-    page(null)
+  it('说明现在缺的数据怎么采：用户确认后 knowfeed 替用户采', async () => {
+    page()
     await screen.findByRole('table', { name: '缺数据的需求' })
-    expect(screen.getByText(/KNOWFEED_ADMIN_URL/)).toBeInTheDocument()
-    expect(screen.queryByRole('link', { name: '去发起采集' })).toBeNull()
+    expect(screen.getByText(/knowfeed 替用户采/)).toBeInTheDocument()
   })
 
   it('还没有人查不到：说一句，不画空表', async () => {
     answer = () => Response.json({ items: [] })
-    page('https://knowfeed-admin.example.test')
+    page()
     expect(await screen.findByRole('status')).toHaveTextContent('还没有人查不到数据。')
     expect(screen.queryByRole('table')).toBeNull()
   })
 
   it('取不到：说没有取到', async () => {
     answer = () => new Response('{}', { status: 503 })
-    page('https://knowfeed-admin.example.test')
+    page()
     expect(await screen.findByRole('alert')).toHaveTextContent('没有取到，请稍后再试。')
   })
 })

@@ -1,22 +1,22 @@
 'use client'
 
-import { useFormatter, useLocale, useTranslations } from 'next-intl'
+import { useFormatter, useTranslations } from 'next-intl'
 
 import { useMissingData } from '../api/demand'
-import { ingestionHref, marketLabel } from '../model/demand'
+import { marketLabel } from '../model/demand'
 
-// 缺数据的需求（账 56）：各用户查不到数据的公司，按代码汇总；采不采由我们定，采集在 knowfeed 管理端发起。
-export function DemandPanel({ infoAdminUrl }: { infoAdminUrl: string | null }) {
+// 缺数据的需求（账 56）：各用户查不到数据的公司，按代码汇总，只看。数据第四版起补采由用户在委托里
+// 确认、knowfeed 替用户采（decisions ⑫⑭），knowfeed 管理端也没有了发起采集的页（⑰），这里不再给链接。
+export function DemandPanel() {
   const t = useTranslations('demand')
   const format = useFormatter()
-  const locale = useLocale()
   const demand = useMissingData()
   const when = (at: string) =>
     format.dateTime(new Date(at), { dateStyle: 'medium', timeStyle: 'short' })
 
   return (
     <section className="reference-card" aria-label={t('title')}>
-      <p className="reference-notice">{infoAdminUrl ? t('howToStart') : t('infoAdminUnset')}</p>
+      <p className="reference-notice">{t('howCollected')}</p>
       {demand.isPending ? <p className="crud-state">{t('loading')}</p> : null}
       {demand.isError ? (
         <p role="alert" className="crud-error">
@@ -39,43 +39,27 @@ export function DemandPanel({ infoAdminUrl }: { infoAdminUrl: string | null }) {
                 <th>{t('users')}</th>
                 <th>{t('lastAt')}</th>
                 <th>{t('datasets')}</th>
-                <th />
               </tr>
             </thead>
             <tbody>
-              {demand.data.map((item) => {
-                const href = ingestionHref(infoAdminUrl, locale, item.security_code)
-                return (
-                  <tr key={item.security_code}>
-                    <td className="font-mono">
-                      {item.security_code}
-                      {item.market ? (
-                        <span className="text-muted-foreground ml-1 text-xs">
-                          {marketLabel(item.market)}
-                        </span>
-                      ) : null}
-                    </td>
-                    <td>{item.times}</td>
-                    <td>{item.users}</td>
-                    <td>{when(item.last_at)}</td>
-                    <td className="font-mono text-xs">
-                      {item.datasets.length ? item.datasets.join(', ') : t('noDataset')}
-                    </td>
-                    <td>
-                      {href ? (
-                        <a
-                          href={href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="secondary-button"
-                        >
-                          {t('start')}
-                        </a>
-                      ) : null}
-                    </td>
-                  </tr>
-                )
-              })}
+              {demand.data.map((item) => (
+                <tr key={item.security_code}>
+                  <td className="font-mono">
+                    {item.security_code}
+                    {item.market ? (
+                      <span className="text-muted-foreground ml-1 text-xs">
+                        {marketLabel(item.market)}
+                      </span>
+                    ) : null}
+                  </td>
+                  <td>{item.times}</td>
+                  <td>{item.users}</td>
+                  <td>{when(item.last_at)}</td>
+                  <td className="font-mono text-xs">
+                    {item.datasets.length ? item.datasets.join(', ') : t('noDataset')}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

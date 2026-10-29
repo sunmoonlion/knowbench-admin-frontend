@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
-import { serverEnv } from '@/env/server'
 import { DemandPanel } from '@/features/demand'
 import { requireAnyRole } from '@/lib/server/auth-session'
 
@@ -13,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t('title'), robots: { index: false, follow: false } }
 }
 
-// 缺数据的需求（账 56）：用户查不到的公司汇总在这里，由我们决定采不采。
+// 缺数据的需求（账 56）：用户查不到的公司汇总在这里，只看。
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   await requireAnyRole(locale, ['admin', 'operator'])
@@ -24,7 +23,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <h1 className="text-2xl font-semibold">{t('title')}</h1>
         <p className="text-muted-foreground">{t('lead')}</p>
       </div>
-      <DemandPanel infoAdminUrl={serverEnv.KNOWFEED_ADMIN_URL ?? null} />
+      <DemandPanel />
     </div>
   )
 }

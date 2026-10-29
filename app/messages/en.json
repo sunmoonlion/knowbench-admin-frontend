@@ -91,9 +91,8 @@
   },
   "demand": {
     "title": "Missing data demand",
-    "lead": "Companies users could not find data for, grouped by code: how many times, how many people, the latest time and the datasets asked for. Aggregated only; it never says who asked. We decide what to collect.",
-    "howToStart": "To collect one, click “Start ingestion”: it opens the info console's Securities page with the code filled in; press “Start ingestion” there.",
-    "infoAdminUnset": "The info console URL (KNOWFEED_ADMIN_URL) is not configured: only codes are listed here; start ingestions by hand on the info console's Securities page.",
+    "lead": "Companies users could not find data for, grouped by code: how many times, how many people, the latest time and the datasets asked for. Aggregated only; it never says who asked.",
+    "howCollected": "Read only. Missing data is now collected by knowfeed for the user after the user confirms it in the task; the platform does not start collection here.",
     "loading": "Loading…",
     "failed": "Could not load. Try again later.",
     "none": "Nobody has run into missing data yet.",
@@ -102,7 +101,6 @@
     "users": "People",
     "lastAt": "Latest",
     "datasets": "Datasets asked for",
-    "noDataset": "(an expert step reported it is not ingested)",
-    "start": "Start ingestion"
+    "noDataset": "(an expert step reported it is not ingested)"
   }
 }
