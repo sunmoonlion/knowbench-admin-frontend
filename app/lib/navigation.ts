@@ -2,6 +2,7 @@ import {
   ChartNoAxesCombined,
   Gauge,
   Cpu,
+  Library,
   Settings,
   TableProperties,
   type LucideIcon,
@@ -10,7 +11,13 @@ import {
 export type AdminNavigationItem = {
   key: string
   path: string
-  labelKey: 'dashboard' | 'reference' | 'richReference' | 'settings' | 'researchRuntime'
+  labelKey:
+    | 'dashboard'
+    | 'reference'
+    | 'richReference'
+    | 'settings'
+    | 'researchRuntime'
+    | 'methodSkillCenter'
   icon: LucideIcon
   requiredRoles?: readonly string[]
   pinned?: boolean
@@ -29,6 +36,13 @@ export const adminNavigation: readonly AdminNavigationItem[] = [
     path: '/research/runtime',
     labelKey: 'researchRuntime',
     icon: Cpu,
+    requiredRoles: ['admin', 'operator'],
+  },
+  {
+    key: 'method-skill-center',
+    path: '/method-skill-center',
+    labelKey: 'methodSkillCenter',
+    icon: Library,
     requiredRoles: ['admin', 'operator'],
   },
   {

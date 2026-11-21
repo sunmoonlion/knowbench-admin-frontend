@@ -61,7 +61,8 @@
     "expandMenu": "展开导航",
     "closeTab": "关闭{name}",
     "governance": "管理能力迁移中枢",
-    "governanceDescription": "P0-007E 将在此基础上逐项迁入菜单、权限、CRUD、审计和通用工具能力。"
+    "governanceDescription": "P0-007E 将在此基础上逐项迁入菜单、权限、CRUD、审计和通用工具能力。",
+    "methodSkillCenter": "方法技能管理中心"
   },
   "settings": {
     "title": "界面设置",
@@ -87,5 +88,30 @@
   "ResearchRuntime": {
     "title": "运行时治理",
     "description": "Research Admin Runtime/Agent 控制台（最小域壳）"
+  },
+  "functions": {
+    "title": "已登记的服务函数",
+    "searchLabel": "提供方、函数名或完整摘要",
+    "search": "查询",
+    "previous": "上一页",
+    "next": "下一页",
+    "empty": "未找到匹配的登记。",
+    "loading": "加载中…",
+    "retry": "读取失败，重试",
+    "digest": "契约摘要",
+    "operation": "实现函数",
+    "scenes": "声明的适用场景",
+    "permissions": "所需权限",
+    "none": "未声明",
+    "input_schema": "输入契约",
+    "output_schema": "输出契约",
+    "references": "引用此版本的正式方法",
+    "unused": "暂无正式方法引用此版本。",
+    "scene": {
+      "native": "原生会话",
+      "incubation": "孵化",
+      "planning": "即时编排",
+      "step": "固定步骤"
+    }
   }
 }
