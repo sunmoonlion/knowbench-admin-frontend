@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { copyText } from '@/lib/rich-utils'
 
 export function CopyButton({ value, label }: { value: string; label: string }) {
@@ -32,6 +32,7 @@ export function LongPressButton({
     if (timer.current) clearTimeout(timer.current)
     timer.current = null
   }
+  useEffect(() => cancel, [])
   return (
     <button
       type="button"
@@ -40,6 +41,8 @@ export function LongPressButton({
         cancel()
         timer.current = setTimeout(onLongPress, 600)
       }}
+      onBlur={cancel}
+      onLostPointerCapture={cancel}
       onPointerUp={cancel}
       onPointerCancel={cancel}
       onPointerLeave={cancel}

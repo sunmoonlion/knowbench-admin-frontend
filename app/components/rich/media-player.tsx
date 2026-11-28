@@ -12,13 +12,17 @@ export function MediaPlayer({
   src: string
   label: string
 }) {
-  const [failed, setFailed] = useState(false)
   let safeSrc: string
   try {
     safeSrc = safeMediaPath(src)
   } catch {
     return <p role="alert">Unsafe media source rejected</p>
   }
+  return <MediaSource key={type + ':' + safeSrc} type={type} safeSrc={safeSrc} label={label} />
+}
+
+function MediaSource({ type, safeSrc, label }: { type: 'audio' | 'video'; safeSrc: string; label: string }) {
+  const [failed, setFailed] = useState(false)
   if (failed) return <p role="alert">Media could not be loaded</p>
   return type === 'audio' ? (
     <audio controls preload="metadata" src={safeSrc} aria-label={label} onError={() => setFailed(true)} />

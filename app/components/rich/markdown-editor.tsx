@@ -1,5 +1,7 @@
 'use client'
 
+import { useId } from 'react'
+
 export function MarkdownEditor({
   label,
   value,
@@ -9,11 +11,12 @@ export function MarkdownEditor({
   value: string
   onChange(value: string): void
 }) {
+  const sourceId = useId()
   return (
     <div className="markdown-editor">
-      <label htmlFor="markdown-source">{label}</label>
+      <label htmlFor={sourceId}>{label}</label>
       <textarea
-        id="markdown-source"
+        id={sourceId}
         value={value}
         maxLength={20_000}
         rows={7}
