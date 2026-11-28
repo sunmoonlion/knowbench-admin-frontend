@@ -87,7 +87,7 @@
   },
   "ResearchRuntime": {
     "title": "Research runtime",
-    "description": "Research Admin Runtime/Agent control surface (minimal shell)"
+    "description": "The user’s signed-in workbench creates sessions, starts turns, and streams events through these endpoints."
   },
   "functions": {
     "title": "Registered service functions",

@@ -87,7 +87,7 @@
   },
   "ResearchRuntime": {
     "title": "运行时治理",
-    "description": "Research Admin Runtime/Agent 控制台（最小域壳）"
+    "description": "用户在已登录的工作台通过以下接口创建会话、发起一轮任务和订阅事件。"
   },
   "functions": {
     "title": "已登记的服务函数",

@@ -9,10 +9,9 @@ export function ResearchRuntimePanel() {
       <h2 className="text-lg font-medium">{t('title')}</h2>
       <p className="text-sm text-muted-foreground">{t('description')}</p>
       <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
-        <li>Admin API: POST /api/agent/sessions</li>
-        <li>Runs: POST /api/agent/sessions/&#123;id&#125;/runs + resume</li>
-        <li>SSE: GET /api/agent/sessions/&#123;id&#125;/stream</li>
-        <li>Knowledge retrieval client uses sunmoonai-knowbench-knowbase-retrieve</li>
+        <li><code>POST /api/workbench/sessions</code></li>
+        <li><code>{'POST /api/workbench/sessions/{session_id}/turns'}</code></li>
+        <li><code>{'GET /api/workbench/sessions/{session_id}/stream'}</code></li>
       </ul>
     </section>
   )
