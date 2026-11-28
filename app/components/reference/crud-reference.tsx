@@ -44,12 +44,12 @@ export function CrudReference() {
         <h2>Table, pagination and state boundaries</h2>
         <DataTable
           caption="Reference resources"
-          rows={rows}
+          rows={rows.slice(page - 1, page)}
           columns={columns}
           rowKey={(row) => row.id}
           emptyLabel="No resources"
           page={page}
-          pageCount={3}
+          pageCount={rows.length}
           onPageChange={setPage}
         />
       </section>
@@ -80,6 +80,7 @@ export function CrudReference() {
                 status: 'active',
               },
             ])
+            setPage(rows.length + 1)
             setNotice('Reference resource added locally')
           }}
         />

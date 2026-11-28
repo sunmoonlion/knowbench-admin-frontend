@@ -1,3 +1,5 @@
+import { useId } from 'react'
+
 export function ResourceDescription({
   title,
   items,
@@ -7,9 +9,10 @@ export function ResourceDescription({
   items: readonly { label: string; value: React.ReactNode }[]
   emptyLabel?: string
 }) {
+  const titleId = useId()
   return (
-    <section className="resource-description" aria-labelledby="resource-description-title">
-      <h2 id="resource-description-title">{title}</h2>
+    <section className="resource-description" aria-labelledby={titleId}>
+      <h2 id={titleId}>{title}</h2>
       <dl>
         {items.map((item) => (
           <div key={item.label}>

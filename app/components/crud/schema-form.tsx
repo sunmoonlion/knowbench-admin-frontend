@@ -40,8 +40,10 @@ export function SchemaForm({
         const nextErrors = Object.fromEntries(
           fields.flatMap((field) => {
             const value = values[field.name]?.trim() ?? ''
+            const input = event.currentTarget.elements.namedItem(field.name)
+            const typeError = input instanceof HTMLInputElement && !input.validity.valid ? input.validationMessage : null
             const error =
-              field.required && !value ? `${field.label} is required` : field.validate?.(value)
+              field.required && !value ? `${field.label} is required` : typeError || field.validate?.(value)
             return error ? [[field.name, error]] : []
           }),
         )
